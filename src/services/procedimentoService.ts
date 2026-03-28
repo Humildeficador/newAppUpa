@@ -3,10 +3,10 @@ import qs from 'qs'
 import { api } from '../lib/axios.js'
 import { getProcedimento } from '../parsers/procedimentoParser.js'
 import { getPacientes, type Paciente } from '../parsers/situacaoParser.js'
+import { getViewState } from '../parsers/viewStateParser.js'
 import { getDocument } from '../utils/getDocument.js'
 import { rl } from '../utils/readline.js'
 import { pacienteService } from './pacienteService.js'
-import { getViewState } from '../parsers/viewStateParser.js'
 
 export interface PacienteData extends Paciente {
 	nome: string
