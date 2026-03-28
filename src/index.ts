@@ -1,9 +1,13 @@
-import { auth } from "./services/auth.services.js"
-import { loadFullSituacao } from "./services/situacao.services.js"
+import { builderMain } from './builders/builderMain.js'
+import { authService } from './services/authService.js'
+import { procedimentoService } from './services/procedimentoService.js'
+import { situacaoService } from './services/situacaoService.js'
 
 async function init() {
-    await auth()
-    await loadFullSituacao()
+	await authService()
+	const situacaoDocument = await situacaoService()
+	const pacientesData = await procedimentoService(situacaoDocument)
+	builderMain(pacientesData)
 }
 
 init()
