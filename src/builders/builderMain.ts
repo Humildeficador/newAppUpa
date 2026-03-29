@@ -1,13 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import type { PacienteData } from '../services/procedimentoService.js'
-import {
-	formatGecaBairros,
-	formatGecaPacientes,
-	formatGecaTotais,
-	formatStandardReport,
-	saveCsv,
-} from '../utils/csvFormatters.js'
 import { saveExcelReport } from '../utils/excelGenerator.js'
 import { conjuntiviteBuilder } from './conjuntiviteBuilder.js'
 import { consultaDiariaBuilder } from './consultaDiariaBuilder.js'
@@ -38,13 +31,4 @@ export async function builderMain(pacientesData: PacienteData[]) {
 	fs.writeFileSync(backupPath, JSON.stringify(backupGeral, null, 2), 'utf-8')
 
 	await saveExcelReport(consultaDiaria, ivas, conjuntivite, ivasOthers, geca)
-
-	saveCsv('consulta_diaria', formatStandardReport(consultaDiaria))
-	saveCsv('ivas', formatStandardReport(ivas))
-	saveCsv('conjuntivite', formatStandardReport(conjuntivite))
-	saveCsv('ivas_others', formatStandardReport(ivasOthers))
-
-	saveCsv('geca_pacientes', formatGecaPacientes(geca))
-	saveCsv('geca_bairros', formatGecaBairros(geca.bairros))
-	saveCsv('geca_totais', formatGecaTotais(geca))
 }

@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "tsx .",
 		"dev:watch": "tsx --watch . ",
-		"lint": "npx @biomejs/biome check --write"
+		"lint": "biome check --write --unsafe"
 	},
 	"keywords": [],
 	"author": "",

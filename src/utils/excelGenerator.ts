@@ -1,7 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import ExcelJS from 'exceljs'
-import type { GecaPadrao, RelatorioPadrao } from './csvFormatters.js'
+import type { gecaBuilder } from '../builders/gecaBuilder.js'
+export type RelatorioPadrao = Record<'m' | 'f', Record<string, number>>
+export type GecaPadrao = ReturnType<typeof gecaBuilder>
 
 function formatStandardSheet(
 	worksheet: ExcelJS.Worksheet,

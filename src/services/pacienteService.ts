@@ -64,7 +64,7 @@ function calculateAge(nasc: string): number {
 
 	if (!nasc.includes('/')) {
 		const fallbackYear = Number(nasc)
-		return isNaN(fallbackYear) ? 0 : currentYear - fallbackYear
+		return Number.isNaN(fallbackYear) ? 0 : currentYear - fallbackYear
 	}
 
 	const [dayStr, monthStr, yearStr] = nasc.split('/')
