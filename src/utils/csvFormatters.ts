@@ -27,7 +27,7 @@ export function formatStandardReport(dados: RelatorioPadrao) {
 
 	for (const genero of generos) {
 		for (const [faixa, quantidade] of Object.entries(dados[genero])) {
-			linhas.push([genero.toUpperCase(), faixa, quantidade])
+			linhas.push([genero.toUpperCase(), `="${faixa}"`, quantidade])
 		}
 	}
 
@@ -38,7 +38,7 @@ export function formatGecaPacientes(dados: GecaPadrao) {
 	const linhas: Array<Array<string | number>> = [['Faixa Etaria', 'Quantidade']]
 
 	for (const [faixa, quantidade] of Object.entries(dados.pacientes)) {
-		linhas.push([faixa, quantidade])
+		linhas.push([`="${faixa}"`, quantidade])
 	}
 	return linhas
 }

@@ -13,10 +13,10 @@ export function consultaDiariaBuilder(pacientesData: PacienteData[]) {
 
 		if (sexo === 'm') {
 			consultaDiaria.m[faixa] += 1
-		} else if(sexo === 'f') {
+		} else if (sexo === 'f') {
 			consultaDiaria.f[faixa] += 1
 		}
 	}
 
-  return consultaDiaria
+	return consultaDiaria
 }

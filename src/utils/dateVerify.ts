@@ -23,11 +23,11 @@ export function dateVerify(date: string) {
 	now.setHours(0, 0, 0, 0)
 
 	if (typedDate.getDate() !== d || typedDate.getMonth() !== m - 1) {
-  return {
-    error: true,
-    message: `Data inexistente (dia ${d} ou mês ${m}).`,
-  };
-}
+		return {
+			error: true,
+			message: `Data inexistente (dia ${d} ou mês ${m}).`,
+		}
+	}
 
 	if (typedDate > now) {
 		return {
@@ -41,23 +41,3 @@ export function dateVerify(date: string) {
 		message: '',
 	}
 }
-
-/* import { rl } from './readline.js'
-async function teste() {
-	let date = await rl.question('Digite a data da situação (DD/MM/YYYY): ')
-
-	let verify = dateVerify(date)
-	while (verify.error) {
-		console.clear()
-		console.log(`\x1b[31m[ERRO]: ${verify.message}\x1b[0m`)
-		date = await rl.question('Digite a data da situação (DD/MM/YYYY): ')
-		verify = dateVerify(date)
-	}
-
-	console.log('OK')
-	rl.close()
-	return
-}
-
-teste()
- */

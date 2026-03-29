@@ -29,6 +29,3 @@ const conjutivite = [
 	'H10.4',
 	'H10.9',
 ]
-
-const cid = cidVerify('H10')
-console.log(cid)

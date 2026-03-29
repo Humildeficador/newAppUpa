@@ -27,11 +27,12 @@ function getMedicacao(document: Document) {
 		),
 	)
 
-	resultado.el = links.find((e) => {
-		if (!e.id.includes('gridProfisAtend__ctl')) return false
-		const linha = e.closest('tr')
-		return linha?.textContent?.includes('TECNICO DE ENFERMAGEM')
-	}) || null
+	resultado.el =
+		links.find((e) => {
+			if (!e.id.includes('gridProfisAtend__ctl')) return false
+			const linha = e.closest('tr')
+			return linha?.textContent?.includes('TECNICO DE ENFERMAGEM')
+		}) || null
 
 	const elMP = links.find((e) => {
 		if (!e.id.includes('gridProcLancados__ctl')) return false

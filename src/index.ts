@@ -7,7 +7,8 @@ async function init() {
 	await authService()
 	const situacaoDocument = await situacaoService()
 	const pacientesData = await procedimentoService(situacaoDocument)
-	builderMain(pacientesData)
+	await builderMain(pacientesData)
+	console.log(`\x1b[32mDados processados com sucesso\x1b[0m`)
 }
 
 init()

@@ -36,7 +36,7 @@ export async function pacienteService(numHygia: string) {
 	const nome =
 		document.querySelector('#TtNome')?.textContent?.toLowerCase() || ''
 	const sexo =
-		document.querySelector('#TddSexo')?.textContent[0]?.toLowerCase() || ''
+		document.querySelector('#TddSexo')?.textContent[0].toLowerCase() || ''
 	const nasc =
 		document.querySelector('#TdDataNasc')?.textContent?.toLowerCase() ||
 		`${(new Date()).getFullYear()}`
@@ -49,20 +49,40 @@ export async function pacienteService(numHygia: string) {
 
 	const idade = calculateAge(nasc)
 
-
-  return {
+	return {
 		nome,
-    sexo,
-    bairro,
-    cidade,
-    idade
-  }
+		sexo,
+		bairro,
+		cidade,
+		idade,
+	}
 }
 
-function calculateAge(nasc: string) {
-	const nowYear = new Date().getFullYear()
-	const nascSplited = nasc?.split('/')
-	const year = Number(nascSplited[2])
+function calculateAge(nasc: string): number {
+	const today = new Date()
+	const currentYear = today.getFullYear()
 
-	return nowYear - year
+	if (!nasc.includes('/')) {
+		const fallbackYear = Number(nasc)
+		return isNaN(fallbackYear) ? 0 : currentYear - fallbackYear
+	}
+
+	const [dayStr, monthStr, yearStr] = nasc.split('/')
+	const birthDay = Number(dayStr)
+	const birthMonth = Number(monthStr)
+	const birthYear = Number(yearStr)
+
+	let age = currentYear - birthYear
+
+	const currentMonth = today.getMonth() + 1
+	const currentDay = today.getDate()
+
+	if (
+		currentMonth < birthMonth ||
+		(currentMonth === birthMonth && currentDay < birthDay)
+	) {
+		age--
+	}
+
+	return age < 0 ? 0 : age
 }

@@ -28,7 +28,10 @@ export async function procedimentoService(document: Document) {
 
 	const pacientes = getPacientes(document)
 	const pacientesData: PacienteData[] = []
-
+	bar.start(pacientes.length, 0)
+	const addMP =
+		(await rl.question('[BETA]: 41999MP? (Y/n): ')).trim().toLowerCase() === 'y'
+	rl.close()
 	for (const data of pacientes) {
 		try {
 			const paciente = await pacienteConstructor(data)
@@ -39,14 +42,12 @@ export async function procedimentoService(document: Document) {
 
 			const document = getDocument(html.data)
 
-			const addMP =
-				(await rl.question('[BETA]: 41999MP? (Y/n)')).trim().toLowerCase() ===
-				'y'
+			const situacao = document.querySelector('#txtAtendStatus')
 
 			const { cid, medicado, pacienteMedicado, numEspecialidade, numRe } =
 				getProcedimento(document)
 
-			if (addMP && !pacienteMedicado) {
+			if (addMP && !pacienteMedicado && situacao?.textContent !== 'Encerrado') {
 				const viewState = getViewState(document)
 				const body = qs.stringify({
 					__EVENTTARGET: 'tlbReg',
@@ -98,7 +99,6 @@ export async function procedimentoService(document: Document) {
 							'Content-Type': 'application/x-www-form-urlencoded',
 							Referer: `http://saudeweb/hygiaweb/Ambulatorio/AtendimentoPac_Registro.aspx?numatend=${paciente.numAtendimento}`,
 						},
-						timeout: 7000,
 					},
 				)
 			}

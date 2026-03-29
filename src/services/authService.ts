@@ -56,6 +56,6 @@ async function login(viewState: string) {
 	}
 	return {
 		error: true,
-		message: msg.textContent,
+		message: msg.textContent || '',
 	}
 }
